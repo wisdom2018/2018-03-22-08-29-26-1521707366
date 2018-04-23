@@ -19,6 +19,7 @@ public class FlatenTest {
 
         Flaten flaten = new Flaten(array);
 
+
         assertThat(flaten.transformToOneDimesional()).isEqualTo(resultList);
     }
 
