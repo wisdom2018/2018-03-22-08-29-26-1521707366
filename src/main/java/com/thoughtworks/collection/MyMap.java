@@ -21,30 +21,21 @@ public class MyMap {
     }
 
     public List<Integer> getTriple() {
-        //将集合A中得元素映射成集合B中的元素
-        List<Integer> al = new ArrayList<>();
+        //将集合A中的元素映射成集合B中的元素
+        List<Integer> al = new ArrayList<Integer>();
         al = array.stream().map(n -> 3 * n).collect(Collectors.toList());
         return al;
-//        throw new NotImplementedException();
     }
 
     public List<String> mapLetter() {
         //数字映射为字母
-        List<String> al = new ArrayList<>();
-        for (int i = 0; i < array.size(); i++) {
-            al.add(String.valueOf(array.get(i)));
-        }
-
-        return al;
-//      throw new NotImplementedException();
+        return array.stream().map(num -> letters[num - 1]).collect(Collectors.toList());
     }
 
     public List<String> mapLetters() {
         List<String> al = new ArrayList<>();
         String[] result = new String[]{"a", "m", "aa", "ad", "az", "ba"};
-        List<String> resultList = Arrays.asList(result);
-        return al;
-//        throw new NotImplementedException();
+        return  array.stream().map(num -> (num/26 > 0? letterList.get((num - 1) / 26 - 1): "") + letterList.get((num - 1) % 26)).collect(Collectors.toList());
     }
 
     public List<Integer> sortFromBig() {

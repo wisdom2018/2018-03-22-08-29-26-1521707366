@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Reduce implements SingleLink<Integer>{
+public class Reduce implements SingleLink<Integer> {
 
     List<Integer> arrayList;
 
@@ -14,56 +14,24 @@ public class Reduce implements SingleLink<Integer>{
 
         this.arrayList = arrayList;
     }
-    public Integer getHeaderData(){
-        int HeaderDate = 0;
-
-        return 0;
-    }
-    public Integer getTailData(){
-        return 0;
-    }
-    public int size(){
-        return 0;
-    }
-    public boolean isEmpty(){
-        return false;
-    }
-    public boolean deleteFirst(){
-        return false;
-    }
-    public boolean deleteLast(){
-        return false;
-    }              //删除尾部元素；
-    public void addHeadPointer(Integer item){
-
-    }   //添加头指针
-    public void addTailPointer(Integer item){
-
-    }
-    public Integer getNode(int index){
-        return 0;
-    }
 
     public int getMaximum() {
         // 获取数组中的最大值
         int maxValue = 0;
         maxValue = arrayList.stream().max(Comparator.comparing(Integer::valueOf)).get();
         return maxValue;
-//      throw new NotImplementedException();
     }
 
     public double getMinimum() {
         int minValue = 0;
         minValue = arrayList.stream().min(Comparator.comparing(Integer::valueOf)).get();
         return minValue;
-//        throw new NotImplementedException();
     }
 
     public double getAverage() {
         double average = 0;
         average = arrayList.stream().mapToInt(n -> n).average().getAsDouble();
         return average;
-//        throw new NotImplementedException();
     }
 
     public double getOrderedMedian() {
@@ -81,14 +49,12 @@ public class Reduce implements SingleLink<Integer>{
             midNumber = al.get(len / 2);
         }
         return midNumber;
-//        throw new NotImplementedException();
     }
 
     public int getFirstEven() {
         int firstEven = 0;
         firstEven = arrayList.stream().filter(n -> n % 2 == 0).findFirst().get();
         return firstEven;
-//        throw new NotImplementedException();
     }
 
     public int getIndexOfFirstEven() {
@@ -100,31 +66,18 @@ public class Reduce implements SingleLink<Integer>{
             }
         }
         return indexOfFirstEven;
-
-//        throw new NotImplementedException();
     }
 
-    public boolean isEqual(List<Integer> arrayList) {
-        boolean result = false;
-        List<Integer> al = new ArrayList<>();
-        for (int i = 0; i < arrayList.size(); i++) {
-            al.add(arrayList.get(i));
-        }
-        if (arrayList.size() != al.size()) {
-            result = false;
-        } else if (arrayList.stream().equals(al)) {
-            result = true;
-        } else {
-            result = false;
-        }
-        return result;
-//        throw new NotImplementedException();
+    public boolean isEqual(List<Integer> arrayList1) {
+        Collections.sort(arrayList1);
+        Collections.sort(arrayList);
+        return arrayList.equals(arrayList1);
     }
 
     //实现接口SingleLink，然后再此函数内使用
     public Double getMedianInLinkList(SingleLink singleLink) {
-        //获取单链表中的中位数
-        throw new NotImplementedException();
+        this.arrayList.stream().forEach(singleLink::addTailPointer);
+        return (double) ((int) singleLink.getNode(this.arrayList.size() / 2) + (int) singleLink.getNode(this.arrayList.size() / 2 + 1)) / 2;
     }
 
     public int getLastOdd() {
@@ -133,7 +86,6 @@ public class Reduce implements SingleLink<Integer>{
         Collections.reverse(arrayList);
         lastOdd = arrayList.stream().filter(n -> n % 2 != 0).findFirst().get();
         return lastOdd;
-//        throw new NotImplementedException();
     }
 
     public int getIndexOfLastOdd() {
@@ -146,6 +98,50 @@ public class Reduce implements SingleLink<Integer>{
             }
         }
         return lastOddIndex;
-//        throw new NotImplementedException();
+    }
+
+    @Override
+    public Integer getHeaderData() {
+        return this.arrayList.get(0);
+    }
+
+    @Override
+    public Integer getTailData() {
+        return this.arrayList.get(this.arrayList.size() - 1);
+    }
+
+    @Override
+    public int size() {
+        return this.arrayList.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return this.arrayList.isEmpty();
+    }
+
+    @Override
+    public Integer getNode(int index) {
+        return this.arrayList.get(index - 1);
+    }
+
+    @Override
+    public boolean deleteFirst() {
+        return this.arrayList.remove(this.getHeaderData());
+    }
+
+    @Override
+    public boolean deleteLast() {
+        return this.arrayList.remove(this.getTailData());
+    }
+
+    @Override
+    public void addHeadPointer(Integer item) {
+        this.arrayList.add(0, item);
+    }
+
+    @Override
+    public void addTailPointer(Integer item) {
+        this.arrayList.add(item);
     }
 }
