@@ -57,7 +57,7 @@ public class ReduceTest {
         List<Integer> EvenArrayList = Arrays.asList(evenArray);
         Reduce evenReduce = new Reduce(EvenArrayList);
 
-        assertThat(evenReduce.getOrderedMedian()).isEqualTo(1.5);
+        assertThat(evenReduce.getOrderedMedian()).isEqualTo(1.0);
     }
 
     @Test
